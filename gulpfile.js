@@ -18,7 +18,6 @@ gulp.task('bootstrap-js', gulp.series( () => {
       .pipe(gulp.dest('src/js'));
 }));
 
-
 // FONT-AWESOME
 gulp.task('font-awesome-css', gulp.series( () => {
    return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
@@ -27,6 +26,12 @@ gulp.task('font-awesome-css', gulp.series( () => {
 gulp.task('font-awesome-fonts', gulp.series( () => {
    return gulp.src('node_modules/font-awesome/fonts/*')
       .pipe(gulp.dest('src/fonts'));
+}));
+
+// SCROLL REVEAL
+gulp.task('scrollreveal-js', gulp.series( () => {
+   return gulp.src('node_modules/scrollreveal/dist/scrollreveal.min.js')
+      .pipe(gulp.dest('src/js'));
 }));
 
 
@@ -40,7 +45,7 @@ gulp.task('sass', gulp.series( () => {
 }));
 
 
-// STATIC SERVER + WATCHING SCSS/HTML FILES
+// STATIC SERVER + WATCHING HTML/SCSS/JS FILES
 gulp.task('serve', gulp.series( ['sass'], () => {
    browserSync.init({
       server: {
@@ -49,7 +54,10 @@ gulp.task('serve', gulp.series( ['sass'], () => {
       notify: false
    });
    gulp.watch('src/scss/**/*.scss', gulp.parallel( ['sass'] ));
+   gulp.watch('src/js/**/*.js').on('change', browserSync.reload);
    gulp.watch('src/*.html').on('change', browserSync.reload);
 }));
 
-gulp.task('default', gulp.series(['bootstrap-js', 'bootstrap-css', 'font-awesome-css', 'font-awesome-fonts', 'serve']));
+
+// GULP START TASK 
+gulp.task('default', gulp.series(['bootstrap-js', 'bootstrap-css', 'font-awesome-css', 'font-awesome-fonts', 'scrollreveal-js', 'serve']));
