@@ -20,12 +20,12 @@ gulp.task('bootstrap-js', gulp.series( () => {
 
 // FONT-AWESOME
 gulp.task('font-awesome-css', gulp.series( () => {
-   return gulp.src('node_modules/font-awesome/css/font-awesome.min.css')
+   return gulp.src('node_modules/@fortawesome/fontawesome-free/css/all.min.css')
       .pipe(gulp.dest('src/css'));
 }));
 gulp.task('font-awesome-fonts', gulp.series( () => {
-   return gulp.src('node_modules/font-awesome/fonts/*')
-      .pipe(gulp.dest('src/fonts'));
+   return gulp.src('node_modules/@fortawesome/fontawesome-free/webfonts/*')
+      .pipe(gulp.dest('src/webfonts'));
 }));
 
 // SCROLL REVEAL
@@ -59,5 +59,5 @@ gulp.task('serve', gulp.series( ['sass'], () => {
 }));
 
 
-// GULP START TASK 
+// GULP START TASK
 gulp.task('default', gulp.series(['bootstrap-js', 'bootstrap-css', 'font-awesome-css', 'font-awesome-fonts', 'scrollreveal-js', 'serve']));
